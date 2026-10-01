@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    rect { fill: #2340b8; }
+    text { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #93a8ff; }
+      text { fill: #0f1424; }
+    }
+  </style>
+  <rect width="64" height="64" rx="14" />
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="600">RB</text>
+</svg>

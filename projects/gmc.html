@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; base-uri 'self'; form-action 'none'">
+  <title>GMC, course seat alerts | Raeein Bagheri</title>
+  <meta name="description" content="How Raeein Bagheri built GMC, a Go service that emails University of Guelph students when a seat opens in a full course.">
+  <link rel="canonical" href="https://raeeinbagheri.com/projects/gmc.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="GMC, course seat alerts">
+  <meta property="og:description" content="A Go service that emails students when a seat opens in a full course.">
+  <meta property="og:url" content="https://raeeinbagheri.com/projects/gmc.html">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <script src="../assets/js/theme-init.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../index.html" aria-label="Raeein Bagheri, home">RB</a>
+
+      <nav class="site-nav" aria-label="Sections">
+        <ul>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#skills">Skills</a></li>
+          <li><a href="../index.html#education">Education</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" data-theme-toggle>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" />
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="case-hero wrap">
+      <a class="back-link" href="../index.html#projects">Back to all projects</a>
+      <div class="project-head">
+        <h1>GMC: Give Me My Course</h1>
+      </div>
+      <p class="hero-lede">A service that emails University of Guelph students the moment a seat opens in a full course.</p>
+      <div class="actions">
+        <a class="button" href="https://github.com/Raeein/gmc" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+      </div>
+
+      <dl class="facts">
+        <div>
+          <dt>Role</dt>
+          <dd>Solo: backend, frontend, infrastructure</dd>
+        </div>
+        <div>
+          <dt>Stack</dt>
+          <dd>Go, vanilla JavaScript</dd>
+        </div>
+        <div>
+          <dt>Runs</dt>
+          <dd>During course selection windows</dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="wrap">
+
+      <section class="section" aria-labelledby="problem-title">
+        <h2 class="section-title" id="problem-title">The problem</h2>
+        <div class="section-body prose">
+          <p>
+            Popular courses fill up within minutes of registration opening. Seats free up later as students
+            drop, but they go to whoever happens to refresh the page at the right moment. Students end up
+            checking the registration system over and over for days.
+          </p>
+          <p>
+            GMC does the checking for them. You sign up for the sections you want, and it emails you as soon
+            as one has an open seat, so you can register before anyone else notices.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="how-title">
+        <h2 class="section-title" id="how-title">How it's built</h2>
+        <div class="section-body prose">
+          <h3>Concurrent polling in Go</h3>
+          <p>
+            The backend watches many sections at once using goroutines and channels. Moving to this concurrent
+            design cut server response time by 60%.
+          </p>
+
+          <h3>Two data stores, two jobs</h3>
+          <p>
+            Firestore holds subscribers and the sections they're watching. MongoDB stores audit logs, kept
+            separate so the service stays stateless and fits a serverless deployment.
+          </p>
+
+          <h3>CI/CD to Google Cloud Run</h3>
+          <p>
+            A GitHub Actions pipeline runs the tests, builds a Docker image, publishes it to Docker Hub and
+            GitHub Releases, and deploys to Google Cloud Run. You can also self-host it from the prebuilt
+            binaries, the Docker image, or from source.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="stack-title">
+        <h2 class="section-title" id="stack-title">Stack</h2>
+        <div class="section-body">
+          <ul class="tags">
+            <li>Go</li><li>JavaScript</li><li>Firestore</li><li>MongoDB</li><li>Docker</li>
+            <li>Google Cloud Run</li><li>GitHub Actions</li><li>SMTP</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> Raeein Bagheri</p>
+      <p><a href="mailto:raeeinbagheri80@gmail.com">raeeinbagheri80@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

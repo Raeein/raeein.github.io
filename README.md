@@ -1,44 +1,33 @@
-# vCard - Personal portfolio
+# raeeinbagheri.com
 
-![GitHub repo size](https://img.shields.io/github/repo-size/codewithsadee/vcard-personal-portfolio)
-![GitHub stars](https://img.shields.io/github/stars/codewithsadee/vcard-personal-portfolio?style=social)
-![GitHub forks](https://img.shields.io/github/forks/codewithsadee/vcard-personal-portfolio?style=social)
-[![Twitter Follow](https://img.shields.io/twitter/follow/codewithsadee?style=social)](https://twitter.com/intent/follow?screen_name=codewithsadee)
-[![YouTube Video Views](https://img.shields.io/youtube/views/SoxmIlgf2zM?style=social)](https://youtu.be/SoxmIlgf2zM)
+Personal site of Raeein Bagheri. Plain HTML, CSS and JavaScript with no build step, hosted on GitHub Pages.
 
-vCard is a fully responsive personal portfolio website, responsive for all devices, built using HTML, CSS, and JavaScript.
+## Structure
 
-## Demo
-
-![vCard Desktop Demo](./website-demo-image/desktop.png "Desktop Demo")
-![vCard Mobile Demo](./website-demo-image/mobile.png "Mobile Demo")
-
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-* [Git](https://git-scm.com/downloads "Download Git") must be installed on your operating system.
-
-## Installing vCard
-
-To install **vCard**, follow these steps:
-
-Linux and macOS:
-
-```bash
-sudo git clone https://github.com/codewithsadee/vcard-personal-portfolio.git
+```
+index.html            Home page (experience, projects, skills, education, contact)
+projects/*.html       Project case studies
+404.html              Not-found page (uses absolute paths; GitHub Pages serves it for any missing URL)
+assets/css/style.css  All styles; color tokens and dark theme at the top
+assets/js/            theme-init.js (runs in <head>, prevents theme flash) and script.js
+assets/docs/resume.pdf
+CNAME                 Custom domain
+.nojekyll             Tells GitHub Pages to serve files as-is
 ```
 
-Windows:
+## Preview locally
 
 ```bash
-git clone https://github.com/codewithsadee/vcard-personal-portfolio.git
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
-## Contact
+## Deploy
 
-If you want to contact me you can reach me at [Twitter](https://www.twitter.com/codewithsadee).
+Push to `master`. GitHub Pages publishes the repo root.
 
-## License
+## Updating
 
-This project is **free to use** and does not contains any license.
+- **Resume:** replace `assets/docs/resume.pdf`.
+- **New project page:** copy `projects/gmc.html`, edit the content, and add a card in the Projects section of `index.html`.
+- **Third-party resources:** each page has a Content-Security-Policy `<meta>` tag. Any new external script, font or image host has to be added there or the browser will block it.
